@@ -1,0 +1,162 @@
+{
+‏	"variables": [],
+‏	"info": {
+‏		"name": "PDF Signing Sample",
+‏		"_postman_id": "cfef21a0-b3d3-41c2-51b7-66419f2438ca",
+‏		"description": "",
+‏		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+‏	"item": [
+		{
+‏			"name": "Get_Signature_Status",
+‏			"request": {
+‏				"url": "https://qa-id.uaepass.ae/trustedx-resources/esignsp/v2/signer_processes/91rnf9vjeep6tlrdqghv8qk46pbj20e1/result",
+‏				"method": "GET",
+‏				"header": [
+					{
+‏						"key": "Authorization",
+‏						"value": "Bearer 8ac0873382be677385774e20444795311b01af71ed3ac29420a32f1b5c67e61d",
+‏						"description": ""
+					}
+				],
+‏				"body": {},
+‏				"description": ""
+			},
+‏			"response": []
+		},
+		{
+‏			"name": "Fetch_Signed_Document",
+‏			"request": {
+‏				"url": "https://qa-id.uaepass.ae/trustedx-resources/esignsp/v2/documents/ktaif7ihh6083123ii21etj90lo7ebe2/content",
+‏				"method": "GET",
+‏				"header": [
+					{
+‏						"key": "Authorization",
+‏						"value": "Bearer f457cf17c93f0bf3a91d6380615410df834aeb5de271b0f86804eca81d2b9340",
+‏						"description": ""
+					}
+				],
+‏				"body": {},
+‏				"description": "Fetch signed doc"
+			},
+‏			"response": []
+		},
+		{
+‏			"name": "Create_Sign_Process",
+‏			"request": {
+‏				"url": "https://qa-id.uaepass.ae/trustedx-resources/esignsp/v2/signer_processes",
+‏				"method": "POST",
+‏				"header": [
+					{
+‏						"key": "Authorization",
+‏						"value": "Bearer ca8dd147eff2200a9375be3d94b67518ccc8b32d331831c1fc13096d59f258b1",
+‏						"description": ""
+					}
+				],
+‏				"body": {
+‏					"mode": "formdata",
+‏					"formdata": [
+						{
+‏							"key": "process",
+‏							"value": "{\n\t\"process_type\": \"urn:safelayer:eidas:processes:document:sign:esigp\",\n\t\"labels\": [[\"digitalid\",\n\t\"server\",\"qualified\"]],\n\t\"signer\": {\n\t\t\"signature_policy_id\": \"urn:safelayer:eidas:policies:sign:document:pdf\",\n\t\t\"parameters\": {\n\t\t\t\"type\": \"pdf\",\n\t\t\t\"signature_field\": {\n\t\t\t\t\"name\": \"Sign1\",\n\"location\" : {\n                    \"page\" : {\n                        \"number\" : \"last\"\n                    },\n                    \"rectangle\" : {\n                        \"x\" : 100,\n                        \"y\" : 110,\n                        \"height\" : 150,\n                        \"width\" : 400\n                    }\n                },\n\n\t\t\t\t\"appearance\": {\n\t\t\t\t\t\"signature_details\": {\n\t\t\t\t\t\t\"details\": [{\n\t\t\t\t\t\t\t\"type\": \"subject\",\n\t\t\t\t\t\t\t\"title\": \"Signer Name: \"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"type\": \"date\",\n\t\t\t\t\t\t\t\"title\": \"Signature Date: \"\n\t\t\t\t\t\t}]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"ui_locales\": [\"en_US\"],\n\t\"finish_callback_url\": \"http://localhost:8080/test\",\n\t\"views\": {\n\t\t\"document_agreement\": {\n\t\t\t\"skip_server_id\": \"true\"\n\t\t}\n\t},\n\t\"timestamp\": {\n\t\t\"provider_id\": \"urn:uae:tws:generation:policy:digitalid\"\n\t}\n}",
+‏							"description": "",
+‏							"type": "text"
+						},
+						{
+‏							"key": "document",
+‏							"value": "",
+‏							"description": "",
+‏							"type": "file"
+						}
+					]
+				},
+‏				"description": ""
+			},
+‏			"response": []
+		},
+		{
+‏			"name": "Get_Signing_AccessToken",
+‏			"request": {
+‏				"url": {
+‏					"raw": "https://qa-id.uaepass.ae/trustedx-authserver/oauth/main-as/token?grant_type=client_credentials&scope=urn%3Asafelayer%3Aeidas%3Asign%3Aprocess%3Adocument",
+‏					"protocol": "https",
+‏					"host": [
+‏						"qa-id",
+‏						"uaepass",
+‏						"ae"
+					],
+‏					"path": [
+‏						"trustedx-authserver",
+‏						"oauth",
+‏						"main-as",
+‏						"token"
+					],
+‏					"query": [
+						{
+‏							"key": "grant_type",
+‏							"value": "client_credentials",
+‏							"equals": true,
+‏							"description": ""
+						},
+						{
+‏							"key": "scope",
+‏							"value": "urn%3Asafelayer%3Aeidas%3Asign%3Aprocess%3Adocument",
+‏							"equals": true,
+‏							"description": ""
+						}
+					],
+‏					"variable": []
+				},
+‏				"method": "POST",
+‏				"header": [
+					{
+‏						"key": "Content-Type",
+‏						"value": "application/x-www-form-urlencoded",
+‏						"description": ""
+					},
+					{
+‏						"key": "Authorization",
+‏						"value": "Basic dGVzdDp0ZXN0",
+‏						"description": ""
+					}
+				],
+‏				"body": {},
+‏				"description": ""
+			},
+‏			"response": []
+		},
+		{
+‏			"name": "Delete-SignProcess",
+‏			"request": {
+‏				"url": "https://qa-id.uaepass.ae/trustedx-resources/esignsp/v2/signer_processes/qdp8qsdda6b1tmg2vk99pnce1qedppor",
+‏				"method": "DELETE",
+‏				"header": [
+					{
+‏						"key": "Authorization",
+‏						"value": "Bearer 5151b425aa8c82a2bb975c704016b4870d1cbdf164c544633f0f06a1746630b3",
+‏						"description": ""
+					}
+				],
+‏				"body": {
+‏					"mode": "formdata",
+‏					"formdata": [
+						{
+‏							"key": "process",
+‏							"value": "{\n\t\"process_type\": \"urn:safelayer:eidas:processes:document:sign:esigp\",\n\t\"labels\": [[\"digitalid\",\n\t\"server\",\"advanced\"]],\n\t\"signer\": {\n\t\t\"signature_policy_id\": \"urn:safelayer:eidas:policies:sign:document:pdf\",\n\t\t\"parameters\": {\n\t\t\t\"type\": \"pdf\",\n\t\t\t\"signature_field\": {\n\t\t\t\t\"name\": \"Sign1\",\n\"location\" : {\n                    \"page\" : {\n                        \"number\" : \"last\"\n                    },\n                    \"rectangle\" : {\n                        \"x\" : 100,\n                        \"y\" : 110,\n                        \"height\" : 150,\n                        \"width\" : 400\n                    }\n                },\n\n\t\t\t\t\"appearance\": {\n\t\t\t\t\t\"signature_details\": {\n\t\t\t\t\t\t\"details\": [{\n\t\t\t\t\t\t\t\"type\": \"subject\",\n\t\t\t\t\t\t\t\"title\": \"Signer Name: \"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"type\": \"date\",\n\t\t\t\t\t\t\t\"title\": \"Signature Date: \"\n\t\t\t\t\t\t}]\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"ui_locales\": [\"en_US\"],\n\t\"finish_callback_url\": \"http://localhost:8080/test\",\n\t\"views\": {\n\t\t\"document_agreement\": {\n\t\t\t\"skip_server_id\": \"true\"\n\t\t}\n\t},\n\t\"timestamp\": {\n\t\t\"provider_id\": \"urn:uae:tws:generation:policy:digitalid\"\n\t}\n}",
+‏							"description": "",
+‏							"type": "text"
+						},
+						{
+‏							"key": "document",
+‏							"value": "",
+‏							"description": "",
+‏							"type": "file"
+						}
+					]
+				},
+‏				"description": ""
+			},
+‏			"response": []
+		}
+	]
+}
